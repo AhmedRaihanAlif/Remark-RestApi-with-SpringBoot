@@ -20,8 +20,14 @@ public class StudentController {
     public List<Student> getStudents(){
     return studentService.getStudents();
     }
+
     @PostMapping
     public Object registerNewRegister(@RequestBody Student student){
        return studentService.addNewStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId){
+        studentService.deleteStudent(studentId);
     }
 }
