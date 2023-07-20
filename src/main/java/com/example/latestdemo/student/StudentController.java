@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:5173")
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
     private final StudentService studentService;
