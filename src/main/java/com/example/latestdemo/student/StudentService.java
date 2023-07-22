@@ -34,19 +34,26 @@ public class StudentService {
     }
 
 @Transactional
-    public void updateNewStudent(Long studentId,String name,String email) {
+    public void updateNewStudent(Long studentId,Student newStudent) {
+    studentRepository.findById(studentId)
+                .map(user -> {
+                    user.setName(newStudent.getName());
+                    user.setEmail(newStudent.getEmail());
+                    user.setAge(newStudent.getAge());
+                    return studentRepository.save(user);
+                });
 
-        Student student = studentRepository.findById(studentId).orElseThrow(()-> new IllegalStateException("student " + studentId+"does not exist" ));
-
-          if(name!=null && !Objects.equals(student.getName(),name)){
-              student.setName(name);
-
-          }
-
-          if(email!=null && !Objects.equals(student.getEmail(),email)){
-              student.setEmail(email);
-
-          }
+//        Student student = studentRepository.findById(studentId).orElseThrow(()-> new IllegalStateException("student " + studentId+"does not exist" ));
+//
+//          if(name!=null && !Objects.equals(student.getName(),name)){
+//              student.setName(name);
+//
+//          }
+//
+//          if(email!=null && !Objects.equals(student.getEmail(),email)){
+//              student.setEmail(email);
+//
+//          }
 
     }
 }
